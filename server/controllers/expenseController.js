@@ -46,16 +46,38 @@ const updateExpenses = async (req, res) => {
         runValidators: true,
       },
     );
-    if (!updateExpenses) {
+    if (!updatedExpense) {
       return res.status(404).json({
         message: "Expense not found",
       });
     }
-    res.status(200).json(updateExpenses);
+    res.status(200).json(updatedExpense);
   } catch (error) {
     res.status(500).json({
       message: error.message,
     });
   }
 };
-module.exports = { createExpense, getExpenses, updateExpenses };
+
+// Delete Method
+
+const deleteExpenses = async (req, res) => {
+  try {
+    const deletedExpense = await Expense.findByIdAndDelete(req.params.id);
+
+    if (!deletedExpense) {
+      return res.status(404).json({
+        message: "Expense Not Found",
+      });
+    }
+    res.status(200).json({
+      message: "Expense deleted successfully",
+      deletedExpense,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+module.exports = { createExpense, getExpenses, updateExpenses, deleteExpenses };
