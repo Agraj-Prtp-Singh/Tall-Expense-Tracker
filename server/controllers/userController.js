@@ -33,4 +33,27 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser };
+// Login User
+const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(404).json({ message: "Invalid Credentials" });
+    }
+
+    res.status(200).json({ message: "Login Successful." });
+  } catch (error) {
+    res.status(500).json({ message: "Error logging in", error: error.message });
+  }
+};
+
+module.exports = { createUser, loginUser };
