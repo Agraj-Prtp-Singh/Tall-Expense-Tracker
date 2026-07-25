@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 // Create User
 const createUser = async (req, res) => {
@@ -22,9 +23,14 @@ const createUser = async (req, res) => {
       password: hashedPassword,
     });
 
-    res
-      .status(201)
-      .json({ message: "User created successfully.", user: newUser });
+    res.status(201).json({
+      message: "User created successfully.",
+      user: {
+        id: newUser.id,
+        name: newUser.name,
+        email: newUser.email,
+      },
+    });
   } catch (error) {
     res.status(500).json({
       message: "Error creating user",
@@ -47,10 +53,18 @@ const loginUser = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(404).json({ message: "Invalid Credentials" });
+      return res.status(401).json({ message: "Invalid Credentials" });
     }
 
-    res.status(200).json({ message: "Login Successful." });
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+      expiresIn: "24h",
+    });
+
+    res.status(200).json({
+      message: "Login Successful.",
+      token,
+      user: { id: user.id, name: user.name, email: user.email },
+    });
   } catch (error) {
     res.status(500).json({ message: "Error logging in", error: error.message });
   }
