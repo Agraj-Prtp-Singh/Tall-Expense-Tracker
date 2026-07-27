@@ -7,7 +7,8 @@ const RightPanel = () => {
   const [activeTab, setActiveTab] = useState("login");
 
   return (
-    <div className="bg-secondary w-2/5 min-h-screen px-8 py-10">
+    <div className="bg-secondary w-2/5 h-full overflow-y-auto px-8 py-10">
+      {" "}
       <div>
         <AuthToggle activeTab={activeTab} setActiveTab={setActiveTab} />
         {activeTab == "login" ? <LoginForm /> : <RegisterForm />}
