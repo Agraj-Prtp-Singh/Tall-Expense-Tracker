@@ -10,8 +10,7 @@ const featureStyle = "text-[18px] font-ibmMono text-[#A9A8A2]";
 
 const LeftPanel = () => {
   return (
-    <div className="bg-primary w-3/5 min-h-screen flex flex-col justify-between px-8 py-10">
-      {/* Logo & Name */}
+<div className="bg-primary w-3/5 h-full flex flex-col justify-between px-8 py-10">      {/* Logo & Name */}
       <div className="px-8">
         <h1 className="text-4xl text-secondary font-newsreader">Tally</h1>
         <p className="text-[18px] font-ibmMono text-[#A9A8A2]">
