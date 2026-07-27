@@ -1,6 +1,8 @@
 import React from "react";
 import LeftPanel from "./LeftPanel";
 import RightPanel from "./RightPanel";
+import Divider from "./Divider";
+import GoogleButton from "./GoogleButton";
 
 const labelStyle = "block text-[15px] font-ibmMono text-[#75746E] uppercase";
 
