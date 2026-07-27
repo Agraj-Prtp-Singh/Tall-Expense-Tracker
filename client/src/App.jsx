@@ -1,11 +1,12 @@
 import React from "react";
 import LeftPanel from "./components/auth/LeftPanel";
-import RegisterForm from "./components/auth/RegisterForm";
+import RightPanel from "./components/auth/RightPanel";
 
 const App = () => {
   return (
-    <div>
-      <RegisterForm />
+    <div className="flex h-screen overflow-hidden">
+      <LeftPanel />
+      <RightPanel />
     </div>
   );
 };
