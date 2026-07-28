@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import {
   ChevronLeft,
   ChevronRight,
@@ -20,7 +20,7 @@ const navItems = [
   },
   {
     id: "addExpenses",
-    label: "Add Expenses",
+    label: "Add Expense",
     icon: Plus,
     to: "/addExpenses",
   },
@@ -44,77 +44,89 @@ const navItems = [
   },
 ];
 
-const Sidebar = () => {
+export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
-  //   const navigate = useNavigate();
+
   return (
     <aside
-      className={`relative flex min-h-screen flex-col bg-[#08041A] text-white transition-all duration-300 ${
-        isOpen ? "w-full md:w-64 px-4 py-6" : "w-full md:w-24 px-3 py-6"
+      className={`relative flex min-h-screen flex-col bg-primary border-r border-white/10 text-secondary transition-all duration-300 ${
+        isOpen ? "w-64" : "w-20"
       }`}
     >
-      {/* Toggle Button */}
+      {/* Collapse Button */}
       <button
-        type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
-        className="absolute top-8 right-4 md:-right-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#2A5BFF]/40 bg-[#101935] text-[#8FB1FF] shadow-lg transition hover:scale-105 hover:bg-[#16244A]"
-        aria-label={isOpen ? "Hide sidebar" : "Show sidebar"}
+        onClick={() => setIsOpen(!isOpen)}
+        className="absolute -right-4 top-8 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-primary shadow-lg"
       >
-        {isOpen ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+        {isOpen ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
       </button>
 
-      {/* Logo & Branding */}
-      <div className="mt-6 flex flex-col items-center">
-        <p
-          className={`${isOpen ? "h-28 w-28" : "h-14 w-14"} object-contain transition-all duration-300`}
-        />
+      {/* Logo */}
+      <div className="border-b border-white/10 px-7 py-8">
+        {isOpen ? (
+          <>
+            <h1 className="text-3xl font-serif">Tally</h1>
 
-        {isOpen && (
-          <div className="mt-3 text-center">
-            <p className="text-2xl font-extrabold tracking-[0.28em] text-white/90">
-              AFTERHOUR
+            <p className="mt-1 text-xs uppercase tracking-[0.25em] text-white/70">
+              Expense Tracker
             </p>
-            <p className="mt-1 text-sm font-semibold tracking-[0.45em] text-white/85">
-              EVENTS
-            </p>
-          </div>
+          </>
+        ) : (
+          <h1 className="text-2xl font-serif text-center">T</h1>
         )}
       </div>
 
-      {/* Nav Items */}
-      <nav className="mt-10 flex flex-1 flex-col gap-3">
+      {/* Navigation */}
+      <nav className="flex-1 py-6">
         {navItems.map(({ id, label, icon: Icon, to }) => (
           <NavLink
             key={id}
             to={to}
             className={({ isActive }) =>
-              `group flex items-center rounded-2xl transition-all duration-200 ${
-                isOpen ? "gap-3 px-4 py-3" : "justify-center px-2 py-3"
-              } ${
+              `
+              relative flex items-center
+              ${isOpen ? "gap-4 px-8 py-4" : "justify-center py-4"}
+              transition-all duration-200
+
+              ${
                 isActive
-                  ? "bg-[#4E7BFF] text-white shadow-[0_10px_30px_rgba(78,123,255,0.35)]"
-                  : "text-white/80 hover:bg-white/8 hover:text-white"
-              }`
+                  ? "bg-white/8 border-l-2 border-white text-white"
+                  : "border-l-2 border-transparent text-white/80 hover:bg-white/5 hover:text-white"
+              }
+            `
             }
           >
-            <Icon size={20} className="shrink-0" />
-            {isOpen && <span className="text-sm font-semibold">{label}</span>}
+            <Icon size={18} strokeWidth={1.8} />
+
+            {isOpen && <span className="text-lg font-medium">{label}</span>}
           </NavLink>
         ))}
       </nav>
 
-      {/* Logout Button */}
-      <button
-        type="button"
-        className={`group mt-4 flex items-center rounded-2xl text-white/60 transition-all duration-200 hover:bg-red-500/20 hover:text-red-400 ${
-          isOpen ? "gap-3 px-4 py-3" : "justify-center px-2 py-3"
-        }`}
-      >
-        <LogOut size={20} className="shrink-0" />
-        {isOpen && <span className="text-sm font-semibold">Logout</span>}
-      </button>
+      {/* Bottom Section */}
+      <div className="border-t border-white/10 p-6">
+        {isOpen && (
+          <>
+            <p className="text-sm uppercase tracking-widest text-white/70">
+              Jane Doe
+            </p>
+
+            <p className="mb-5 text-sm text-white/60">jane@email.com</p>
+          </>
+        )}
+
+        <button
+          className={`flex items-center text-white/80 hover:text-white ${
+            isOpen ? "gap-3" : "justify-center w-full"
+          }`}
+        >
+          <LogOut size={18} />
+
+          {isOpen && (
+            <span className="text-sm uppercase tracking-wider">Log Out</span>
+          )}
+        </button>
+      </div>
     </aside>
   );
-};
-
-export default Sidebar;
+}
