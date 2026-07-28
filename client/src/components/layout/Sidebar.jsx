@@ -44,6 +44,12 @@ const navItems = [
   },
 ];
 
+const user = [
+  {
+    name: "Jane Doe",
+    email: "jane@email.com",
+  },
+];
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
 
@@ -105,15 +111,16 @@ export default function Sidebar() {
 
       {/* Bottom Section */}
       <div className="border-t border-white/10 p-6">
-        {isOpen && (
-          <>
-            <p className="text-sm uppercase tracking-widest text-white/70">
-              Jane Doe
-            </p>
+        {isOpen &&
+          user.map((person) => (
+            <div key={person.email}>
+              <p className="text-sm uppercase tracking-widest text-white/70">
+                {person.name}
+              </p>
 
-            <p className="mb-5 text-sm text-white/60">jane@email.com</p>
-          </>
-        )}
+              <p className="mb-5 text-sm text-white/60">{person.email}</p>
+            </div>
+          ))}
 
         <button
           className={`flex items-center text-white/80 hover:text-white ${
