@@ -83,66 +83,73 @@ export default function RecentExpenses() {
         >
           {/* Left */}
           <div className="flex items-center gap-4">
-            <span
-              className={`h-3.5 w-3.5 shrink-0 rounded-full ${expense.color}`}
-            />
-
             {editingId === expense.id ? (
-              <div className="w-full max-w-md rounded-lg border border-neutral-200 bg-neutral-50 p-5 shadow-sm">
-                <h4 className="mb-4 text-[16px] font-semibold text-black">
-                  Edit Expense
-                </h4>
+              <div className="mx-6 my-5 w-full rounded-xl border border-neutral-200 bg-neutral-50 p-8 shadow-sm">
+                {/* Header */}
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold text-black">
+                    Edit Expense
+                  </h3>
 
-                <div className="space-y-4">
+                  <p className="mt-1 text-sm text-neutral-500">
+                    Modify the expense details below and save your changes.
+                  </p>
+                </div>
+
+                {/* Form */}
+                <div className="grid grid-cols-2 gap-6">
                   <div>
-                    <label className="mb-1 block text-[13px] font-medium text-neutral-600">
+                    <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-neutral-500">
                       Title
                     </label>
+
                     <input
                       type="text"
-                      className="w-full rounded-md border border-neutral-300 bg-white px-3 py-2.5 text-[14px] outline-none transition focus:border-black"
                       value={form.title}
                       onChange={(e) =>
                         setForm({ ...form, title: e.target.value })
                       }
+                      className="w-full rounded-lg border border-neutral-300 bg-white px-5 py-3.5 text-sm outline-none transition-all duration-200 focus:border-black focus:ring-2 focus:ring-neutral-200"
                     />
                   </div>
 
                   <div>
-                    <label className="mb-1 block text-[13px] font-medium text-neutral-600">
+                    <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-neutral-500">
                       Category
                     </label>
+
                     <input
                       type="text"
-                      className="w-full rounded-md border border-neutral-300 bg-white px-3 py-2.5 text-[14px] outline-none transition focus:border-black"
                       value={form.category}
                       onChange={(e) =>
                         setForm({ ...form, category: e.target.value })
                       }
+                      className="w-full rounded-lg border border-neutral-300 bg-white px-5 py-3.5 text-sm outline-none transition-all duration-200 focus:border-black focus:ring-2 focus:ring-neutral-200"
                     />
                   </div>
 
                   <div>
-                    <label className="mb-1 block text-[13px] font-medium text-neutral-600">
+                    <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-neutral-500">
                       Date
                     </label>
+
                     <input
                       type="text"
-                      className="w-full rounded-md border border-neutral-300 bg-white px-3 py-2.5 text-[14px] outline-none transition focus:border-black"
                       value={form.date}
                       onChange={(e) =>
                         setForm({ ...form, date: e.target.value })
                       }
+                      className="w-full rounded-lg border border-neutral-300 bg-white px-5 py-3.5 text-sm outline-none transition-all duration-200 focus:border-black focus:ring-2 focus:ring-neutral-200"
                     />
                   </div>
 
                   <div>
-                    <label className="mb-1 block text-[13px] font-medium text-neutral-600">
+                    <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-neutral-500">
                       Amount
                     </label>
+
                     <input
                       type="number"
-                      className="w-full rounded-md border border-neutral-300 bg-white px-3 py-2.5 text-[14px] outline-none transition focus:border-black"
                       value={form.amount}
                       onChange={(e) =>
                         setForm({
@@ -150,24 +157,26 @@ export default function RecentExpenses() {
                           amount: Number(e.target.value),
                         })
                       }
+                      className="w-full rounded-lg border border-neutral-300 bg-white px-5 py-3.5 text-sm outline-none transition-all duration-200 focus:border-black focus:ring-2 focus:ring-neutral-200"
                     />
                   </div>
+                </div>
 
-                  <div className="flex justify-end gap-3 pt-2">
-                    <button
-                      onClick={() => setEditingId(null)}
-                      className="rounded-md border border-neutral-300 px-4 py-2 text-[14px] font-medium text-neutral-700 transition hover:bg-neutral-100"
-                    >
-                      Cancel
-                    </button>
+                {/* Buttons */}
+                <div className="mt-8 flex justify-end gap-4 border-t border-neutral-200 pt-6">
+                  <button
+                    onClick={() => setEditingId(null)}
+                    className="rounded-lg border border-neutral-300 bg-white px-5 py-2.5 text-sm font-medium text-neutral-700 transition hover:bg-neutral-100"
+                  >
+                    Cancel
+                  </button>
 
-                    <button
-                      onClick={saveEdit}
-                      className="rounded-md bg-black px-5 py-2 text-[14px] font-medium text-white transition hover:bg-neutral-800"
-                    >
-                      Save Changes
-                    </button>
-                  </div>
+                  <button
+                    onClick={saveEdit}
+                    className="rounded-lg bg-black px-5 py-2.5 text-sm font-medium text-white transition hover:bg-neutral-800"
+                  >
+                    Save Changes
+                  </button>
                 </div>
               </div>
             ) : (
