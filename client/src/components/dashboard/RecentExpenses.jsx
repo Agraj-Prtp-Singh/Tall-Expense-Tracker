@@ -88,45 +88,87 @@ export default function RecentExpenses() {
             />
 
             {editingId === expense.id ? (
-              <div className="space-y-2">
-                <input
-                  className="block w-full rounded border border-neutral-300 px-3 py-2 text-[14px] outline-none focus:border-black"
-                  value={form.title}
-                  onChange={(e) => setForm({ ...form, title: e.target.value })}
-                />
+              <div className="w-full max-w-md rounded-lg border border-neutral-200 bg-neutral-50 p-5 shadow-sm">
+                <h4 className="mb-4 text-[16px] font-semibold text-black">
+                  Edit Expense
+                </h4>
 
-                <input
-                  className="block w-full rounded border border-neutral-300 px-3 py-2 text-[14px] outline-none focus:border-black"
-                  value={form.category}
-                  onChange={(e) =>
-                    setForm({ ...form, category: e.target.value })
-                  }
-                />
+                <div className="space-y-4">
+                  <div>
+                    <label className="mb-1 block text-[13px] font-medium text-neutral-600">
+                      Title
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full rounded-md border border-neutral-300 bg-white px-3 py-2.5 text-[14px] outline-none transition focus:border-black"
+                      value={form.title}
+                      onChange={(e) =>
+                        setForm({ ...form, title: e.target.value })
+                      }
+                    />
+                  </div>
 
-                <input
-                  className="block w-full rounded border border-neutral-300 px-3 py-2 text-[14px] outline-none focus:border-black"
-                  value={form.date}
-                  onChange={(e) => setForm({ ...form, date: e.target.value })}
-                />
+                  <div>
+                    <label className="mb-1 block text-[13px] font-medium text-neutral-600">
+                      Category
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full rounded-md border border-neutral-300 bg-white px-3 py-2.5 text-[14px] outline-none transition focus:border-black"
+                      value={form.category}
+                      onChange={(e) =>
+                        setForm({ ...form, category: e.target.value })
+                      }
+                    />
+                  </div>
 
-                <input
-                  type="number"
-                  className="block w-full rounded border border-neutral-300 px-3 py-2 text-[14px] outline-none focus:border-black"
-                  value={form.amount}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      amount: Number(e.target.value),
-                    })
-                  }
-                />
+                  <div>
+                    <label className="mb-1 block text-[13px] font-medium text-neutral-600">
+                      Date
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full rounded-md border border-neutral-300 bg-white px-3 py-2.5 text-[14px] outline-none transition focus:border-black"
+                      value={form.date}
+                      onChange={(e) =>
+                        setForm({ ...form, date: e.target.value })
+                      }
+                    />
+                  </div>
 
-                <button
-                  onClick={saveEdit}
-                  className="rounded bg-black px-4 py-2 text-[14px] text-white transition hover:bg-neutral-800"
-                >
-                  Save
-                </button>
+                  <div>
+                    <label className="mb-1 block text-[13px] font-medium text-neutral-600">
+                      Amount
+                    </label>
+                    <input
+                      type="number"
+                      className="w-full rounded-md border border-neutral-300 bg-white px-3 py-2.5 text-[14px] outline-none transition focus:border-black"
+                      value={form.amount}
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          amount: Number(e.target.value),
+                        })
+                      }
+                    />
+                  </div>
+
+                  <div className="flex justify-end gap-3 pt-2">
+                    <button
+                      onClick={() => setEditingId(null)}
+                      className="rounded-md border border-neutral-300 px-4 py-2 text-[14px] font-medium text-neutral-700 transition hover:bg-neutral-100"
+                    >
+                      Cancel
+                    </button>
+
+                    <button
+                      onClick={saveEdit}
+                      className="rounded-md bg-black px-5 py-2 text-[14px] font-medium text-white transition hover:bg-neutral-800"
+                    >
+                      Save Changes
+                    </button>
+                  </div>
+                </div>
               </div>
             ) : (
               <div>
