@@ -2,6 +2,7 @@ import React from "react";
 import DashboardNav from "./DashboardNav";
 import Stats from "./Stats";
 import Insight from "./Insight";
+import RecentExpenses from "./RecentExpenses";
 
 const Dashboard = () => {
   return (
@@ -9,6 +10,14 @@ const Dashboard = () => {
       <DashboardNav />
       <Stats />
       <Insight />
+
+      <div className="mt-10 grid grid-cols-12 gap-6">
+        <div className="col-span-7 p-8">
+          <RecentExpenses />
+        </div>
+
+        <div className="col-span-5"></div>
+      </div>
     </div>
   );
 };
