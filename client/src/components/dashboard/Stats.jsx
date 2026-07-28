@@ -36,11 +36,11 @@ const Stats = () => {
             key={stats.id}
             className="border border-black/20 p-8 items-center"
           >
-            <p className="font-ibmMono uppercase text-[#75746E]">
+            <p className="font-ibmMono uppercase text-[18px] text-[#75746E]">
               {stats.title}
             </p>
             <h2
-              className={`mt-2 font-ibmMono text-[28px] font-bold ${stats.id == 2 ? "text-green-500" : ""}`}
+              className={`mt-2 font-ibmMono text-[26px] font-bold ${stats.id == 2 ? "text-green-500" : ""}`}
             >
               {stats.value}
             </h2>
