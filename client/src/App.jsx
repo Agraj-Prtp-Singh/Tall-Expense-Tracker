@@ -2,6 +2,7 @@ import React from "react";
 import LeftPanel from "./components/auth/LeftPanel";
 import RightPanel from "./components/auth/RightPanel";
 import Sidebar from "./components/layout/Sidebar";
+import Dashboard from "./components/dashboard/Dashboard";
 
 const App = () => {
   return (
@@ -9,8 +10,12 @@ const App = () => {
     //   <LeftPanel />
     //   <RightPanel />
     // </div>
-    <div>
+    <div className="flex min-h-screen">
       <Sidebar />
+
+      <main className="flex-1">
+        <Dashboard />
+      </main>
     </div>
   );
 };
