@@ -34,17 +34,19 @@ const Stats = () => {
         {dashboardStats.map((stats) => (
           <div
             key={stats.id}
-            className="border border-black/20 p-8 items-center"
+            className="border border-black/20 p-4 items-center  text-center"
           >
-            <p className="font-ibmMono uppercase text-[18px] text-[#75746E]">
+            <p className="font-ibmMono uppercase text-[14px] text-[#75746E]  text-center">
               {stats.title}
             </p>
             <h2
-              className={`mt-2 font-ibmMono text-[26px] font-bold ${stats.id == 2 ? "text-green-500" : ""}`}
+              className={`mt-2 font-ibmMono text-[20px] text-center font-bold ${stats.id == 2 ? "text-green-500" : ""}`}
             >
               {stats.value}
             </h2>
-            <p className="mt-2 font-inter text-[#75746E]">{stats.subtitle}</p>
+            <p className="mt-2 font-inter text-[14px] text-[#75746E]">
+              {stats.subtitle}
+            </p>
           </div>
         ))}
       </div>
