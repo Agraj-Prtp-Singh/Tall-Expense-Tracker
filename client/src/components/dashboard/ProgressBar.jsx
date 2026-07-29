@@ -4,11 +4,11 @@ const ProgressBar = ({ value = 0, max = 100 }) => {
 
   return (
     <div
+      className="h-2 w-full overflow-hidden rounded-full bg-gray-100"
       role="progressbar"
       aria-valuenow={value}
       aria-valuemin={0}
       aria-valuemax={max}
-      className="mt-2 h-2 w-full overflow-hidden rounded-full bg-gray-100"
     >
       <div
         className="h-full bg-black transition-all duration-500"
