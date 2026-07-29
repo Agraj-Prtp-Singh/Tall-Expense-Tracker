@@ -55,7 +55,7 @@ const SpendByCategory = () => {
     : categories.slice(0, INITIAL_VISIBLE);
 
   return (
-    <div className="w-full max-w-md border border-gray-200 bg-white">
+    <div className="w-full max-w-md border rounded border-gray-200 bg-white">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-gray-200 px-6 py-5">
         <h2 className="text-[16px] font-semibold text-black">
