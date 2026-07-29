@@ -3,6 +3,7 @@ import DashboardNav from "./DashboardNav";
 import Stats from "./Stats";
 import Insight from "./Insight";
 import RecentExpenses from "./RecentExpenses";
+import SpendByCategory from "./SpendByCategory";
 
 const Dashboard = () => {
   return (
@@ -16,7 +17,9 @@ const Dashboard = () => {
           <RecentExpenses />
         </div>
 
-        <div className="col-span-5"></div>
+        <div className="col-span-5">
+          <SpendByCategory />
+        </div>
       </div>
     </div>
   );
