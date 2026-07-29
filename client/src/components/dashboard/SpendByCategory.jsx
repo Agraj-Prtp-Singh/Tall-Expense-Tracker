@@ -28,7 +28,11 @@ const categories = [
   },
 ];
 
-const maxAmount = Math.max(...categories.map((item) => item.amount));
+// Total spent this month
+const totalSpent = categories.reduce(
+  (total, category) => total + category.amount,
+  0,
+);
 
 const SpendByCategory = () => {
   return (
@@ -39,7 +43,7 @@ const SpendByCategory = () => {
           Spend by category
         </h2>
 
-        <button className="text-sm font-ibmMono text-gray-500 hover:text-black transition">
+        <button className="text-sm font-ibmMono text-gray-500 transition hover:text-black">
           Manage →
         </button>
       </div>
@@ -50,13 +54,18 @@ const SpendByCategory = () => {
           key={category.id}
           className="border-b border-gray-200 px-6 py-5 last:border-b-0"
         >
-          <div className="flex items-center justify-between">
+          <div className="mb-2 flex items-center justify-between">
             <p className="text-lg font-medium text-black">{category.name}</p>
 
             <span className="text-lg text-gray-500">${category.amount}</span>
           </div>
 
-          <ProgressBar value={category.amount} max={maxAmount} />
+          <ProgressBar value={category.amount} max={totalSpent} />
+
+          <p className="mt-2 text-sm text-gray-500">
+            {((category.amount / totalSpent) * 100).toFixed(1)}% of total
+            spending
+          </p>
         </div>
       ))}
     </div>
