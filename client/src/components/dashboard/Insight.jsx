@@ -10,7 +10,7 @@ const Insight = () => {
   return (
     <div className="p-8">
       <div className="border border-black/20 flex p-4 items-center bg-[#FAFAF8]">
-        <p className="border w-[100px] p-[2px] text-center text-[14px] mr-4 font-ibmMono bg-primary text-secondary">
+        <p className="border w-25 p-0.5 text-center text-[14px] mr-4 font-ibmMono bg-primary text-secondary">
           {aiInsight.title}
         </p>
         <p className="text-[15px] font-light font-inter">{aiInsight.insight}</p>
