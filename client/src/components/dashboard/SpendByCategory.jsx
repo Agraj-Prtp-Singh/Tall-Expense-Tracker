@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import ProgressBar from "./ProgressBar";
 
 const categories = [
@@ -26,15 +28,32 @@ const categories = [
     name: "Subscriptions",
     amount: 304,
   },
+  {
+    id: 6,
+    name: "Entertainment",
+    amount: 220,
+  },
+  {
+    id: 7,
+    name: "Health",
+    amount: 180,
+  },
 ];
 
-// Total spent this month
 const totalSpent = categories.reduce(
   (total, category) => total + category.amount,
   0,
 );
 
+const INITIAL_VISIBLE = 3;
+
 const SpendByCategory = () => {
+  const [expanded, setExpanded] = useState(false);
+
+  const visibleCategories = expanded
+    ? categories
+    : categories.slice(0, INITIAL_VISIBLE);
+
   return (
     <div className="w-full max-w-md border border-gray-200 bg-white">
       {/* Header */}
@@ -43,31 +62,48 @@ const SpendByCategory = () => {
           Spend by category
         </h2>
 
-        <button className="text-sm font-ibmMono text-gray-500 transition hover:text-black">
-          Manage →
-        </button>
+        {categories.length > INITIAL_VISIBLE && (
+          <button
+            onClick={() => setExpanded((prev) => !prev)}
+            className="text-sm font-ibmMono text-gray-500 transition hover:text-black"
+          >
+            {expanded ? "Show less ←" : "Show more →"}
+          </button>
+        )}
       </div>
 
-      {/* Categories */}
-      {categories.map((category) => (
-        <div
-          key={category.id}
-          className="border-b border-gray-200 px-6 py-5 last:border-b-0"
-        >
-          <div className="mb-2 flex items-center justify-between">
-            <p className="text-lg font-medium text-black">{category.name}</p>
+      <AnimatePresence initial={false}>
+        {visibleCategories.map((category) => (
+          <motion.div
+            key={category.id}
+            layout
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden border-b border-gray-200 last:border-b-0"
+          >
+            <div className="px-6 py-5">
+              <div className="mb-2 flex items-center justify-between">
+                <p className="text-lg font-medium text-black">
+                  {category.name}
+                </p>
 
-            <span className="text-lg text-gray-500">${category.amount}</span>
-          </div>
+                <span className="text-lg text-gray-500">
+                  ${category.amount}
+                </span>
+              </div>
 
-          <ProgressBar value={category.amount} max={totalSpent} />
+              <ProgressBar value={category.amount} max={totalSpent} />
 
-          <p className="mt-2 text-sm text-gray-500">
-            {((category.amount / totalSpent) * 100).toFixed(1)}% of total
-            spending
-          </p>
-        </div>
-      ))}
+              <p className="mt-2 text-sm text-gray-500">
+                {((category.amount / totalSpent) * 100).toFixed(1)}% of total
+                spending
+              </p>
+            </div>
+          </motion.div>
+        ))}
+      </AnimatePresence>
     </div>
   );
 };
