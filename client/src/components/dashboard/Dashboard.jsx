@@ -17,7 +17,7 @@ const Dashboard = () => {
           <RecentExpenses />
         </div>
 
-        <div className="col-span-5">
+        <div className="col-span-5 p-8">
           <SpendByCategory />
         </div>
       </div>
