@@ -2,7 +2,9 @@ import React from "react";
 import LeftPanel from "./components/auth/LeftPanel";
 import RightPanel from "./components/auth/RightPanel";
 import Sidebar from "./components/layout/Sidebar";
-import Dashboard from "./components/dashboard/Dashboard";
+import Dashboard from "./pages/Dashboard";
+import "react-datepicker/dist/react-datepicker.css";
+import AddExpenses from "./pages/AddExpenses";
 
 const App = () => {
   return (
@@ -15,6 +17,7 @@ const App = () => {
 
       <main className="flex-1">
         <Dashboard />
+        {/* <AddExpenses /> */}
       </main>
     </div>
   );
