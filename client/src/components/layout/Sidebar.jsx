@@ -9,6 +9,7 @@ import {
   LogOut,
   List,
   FilePenLine,
+  Wallet,
 } from "lucide-react";
 
 const navItems = [
@@ -19,10 +20,16 @@ const navItems = [
     to: "/dashboard",
   },
   {
-    id: "addExpenses",
-    label: "Add Expense",
+    id: "expenses",
+    label: "Expense",
     icon: Plus,
-    to: "/addExpenses",
+    to: "/Expenses",
+  },
+  {
+    id: "budgetManagement",
+    label: "Budget Management",
+    icon: Wallet,
+    to: "/budgetManagement",
   },
   {
     id: "categories",
