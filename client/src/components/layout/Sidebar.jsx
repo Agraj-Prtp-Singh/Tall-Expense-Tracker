@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   ChevronLeft,
   ChevronRight,
@@ -59,6 +59,7 @@ const user = [
 ];
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
+  const navigate = useNavigate();
 
   return (
     <aside
