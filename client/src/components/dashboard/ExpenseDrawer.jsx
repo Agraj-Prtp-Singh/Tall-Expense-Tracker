@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Paperclip, CalendarDays, X } from "lucide-react";
+import { categories } from "../../data/categories";
 
 const paymentMethods = ["Card", "Cash", "Bank Transfer", "UPI"];
 
@@ -66,9 +67,28 @@ export default function ExpenseDrawer({
         <div className="px-10 py-8">
           {/* Amount */}
           <div>
-            <h1 className="font-mono text-6xl font-bold tracking-tight">
-              {Number(form.amount).toFixed(2)}
-            </h1>
+            <input
+              type="number"
+              step="0.01"
+              value={form.amount}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  amount: e.target.value,
+                })
+              }
+              className="
+    w-full
+    bg-transparent
+    border-none
+    outline-none
+    p-0
+    font-mono
+    text-6xl
+    font-bold
+    tracking-tight
+  "
+            />
 
             <div className="mt-6 border-b border-black" />
           </div>
@@ -91,7 +111,8 @@ export default function ExpenseDrawer({
             <div>
               <label className="text-[14px]">Category</label>
 
-              <input
+              <select
+                className="w-full border border-neutral-500 bg-white px-2 py-2 outline-none"
                 value={form.category}
                 onChange={(e) =>
                   setForm({
@@ -99,8 +120,14 @@ export default function ExpenseDrawer({
                     category: e.target.value,
                   })
                 }
-                className="mt-3 w-full border-b border-black bg-transparent py-2 outline-none"
-              />
+              >
+                {" "}
+                {categories.map((category) => (
+                  <option key={category.id} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div>
