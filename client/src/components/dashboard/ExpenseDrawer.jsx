@@ -18,7 +18,7 @@ export default function ExpenseDrawer({
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.4 }}
         exit={{ opacity: 0 }}
-        onClick={onClose} 
+        onClick={onClose}
         className="fixed inset-0 z-40 bg-black"
       />
 
