@@ -1,14 +1,24 @@
-import React from "react";
-import ExpenseNav from "../components/expense/ExpenseNav";
+import React, { useState } from "react";
 import SearchBar from "../components/expense/SearchBar";
+import ExpenseNav from "../components/expense/ExpenseNav";
+import ExpenseList from "../components/expense/ExpenseList";
+import { initialExpenses } from "../data/expenses";
 
-const Expense = () => {
+const Expenses = () => {
+  const [search, setSearch] = useState("");
+
+  const filteredExpenses = initialExpenses.filter((expense) =>
+    expense.title.toLowerCase().includes(search.toLowerCase()),
+  );
+
   return (
-    <div>
+    <>
       <ExpenseNav />
-      <SearchBar />
-    </div>
+      <SearchBar search={search} setSearch={setSearch} />
+
+      <ExpenseList expenses={filteredExpenses} />
+    </>
   );
 };
 
-export default Expense;
+export default Expenses;

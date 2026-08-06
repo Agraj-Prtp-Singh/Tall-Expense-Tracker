@@ -23,7 +23,7 @@ const navItems = [
     id: "expenses",
     label: "Expense",
     icon: Plus,
-    to: "/Expenses",
+    to: "/expenses",
   },
   {
     id: "budgetManagement",
