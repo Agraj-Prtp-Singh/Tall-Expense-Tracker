@@ -1,3 +1,5 @@
+import { ShoppingCart, Car, MonitorPlay, Coffee, Fuel } from "lucide-react";
+
 export const initialExpenses = [
   {
     id: 1,
@@ -11,6 +13,7 @@ export const initialExpenses = [
     tags: ["groceries", "essentials"],
     receipt: "",
     section: "Today",
+    icon: ShoppingCart,
   },
   {
     id: 2,
@@ -24,6 +27,7 @@ export const initialExpenses = [
     tags: ["travel"],
     receipt: "",
     section: "Today",
+    icon: Car,
   },
   {
     id: 3,
@@ -37,6 +41,7 @@ export const initialExpenses = [
     tags: ["entertainment"],
     receipt: "",
     section: "Yesterday",
+    icon: MonitorPlay,
   },
   {
     id: 4,
@@ -50,6 +55,7 @@ export const initialExpenses = [
     tags: ["coffee"],
     receipt: "",
     section: "Yesterday",
+    icon: Coffee,
   },
   {
     id: 5,
@@ -63,6 +69,7 @@ export const initialExpenses = [
     tags: ["fuel"],
     receipt: "",
     section: "This Week",
+    icon: Fuel,
   },
   {
     id: 6,
@@ -76,5 +83,6 @@ export const initialExpenses = [
     tags: ["groceries"],
     receipt: "",
     section: "This Week",
+    icon: ShoppingCart,
   },
 ];
