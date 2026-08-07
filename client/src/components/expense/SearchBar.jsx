@@ -1,18 +1,10 @@
 import React, { useState } from "react";
 import { Search, SlidersHorizontal, ArrowUpDown, Plus } from "lucide-react";
+import { categories } from "../../data/categories";
 
 const SearchBar = ({ search, setSearch, filter, setFilter, sort, setSort }) => {
   const [showFilter, setShowFilter] = useState(false);
   const [showSort, setShowSort] = useState(false);
-
-  const categories = [
-    "All",
-    "Food",
-    "Shopping",
-    "Transport",
-    "Entertainment",
-    "Bills",
-  ];
 
   return (
     <div className="mt-6 px-7">
@@ -41,22 +33,32 @@ const SearchBar = ({ search, setSearch, filter, setFilter, sort, setSort }) => {
           >
             <SlidersHorizontal size={18} />
             <span className="text-sm font-medium">
-              {filter === "All" ? "Filter" : filter}
+              {filter === "All" ? "All Categories" : filter}
             </span>
           </button>
 
           {showFilter && (
-            <div className="absolute right-0 mt-2 w-48 rounded-xl border bg-white shadow-lg z-50">
+            <div className="absolute right-0 mt-2 w-56 rounded-xl border bg-white shadow-lg z-50">
+              <button
+                onClick={() => {
+                  setFilter("All");
+                  setShowFilter(false);
+                }}
+                className="block w-full text-left px-4 py-3 hover:bg-gray-100"
+              >
+                All Categories
+              </button>
+
               {categories.map((category) => (
                 <button
-                  key={category}
+                  key={category.id}
                   onClick={() => {
-                    setFilter(category);
+                    setFilter(category.name);
                     setShowFilter(false);
                   }}
                   className="block w-full text-left px-4 py-3 hover:bg-gray-100"
                 >
-                  {category}
+                  {category.name}
                 </button>
               ))}
             </div>
