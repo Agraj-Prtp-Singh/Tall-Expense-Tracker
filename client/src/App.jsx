@@ -5,6 +5,7 @@ import Sidebar from "./components/layout/Sidebar";
 import Dashboard from "./pages/Dashboard";
 import "react-datepicker/dist/react-datepicker.css";
 import Expense from "./pages/Expense";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
@@ -12,12 +13,14 @@ const App = () => {
     //   <LeftPanel />
     //   <RightPanel />
     // </div>
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-gray-50">
       <Sidebar />
 
       <main className="flex-1">
-        {/* <Dashboard /> */}
-        <Expense />
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/expenses" element={<Expense />} />
+        </Routes>
       </main>
     </div>
   );
