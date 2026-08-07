@@ -17,7 +17,7 @@ const navItems = [
     id: "dashboard",
     label: "Dashboard",
     icon: LayoutDashboard,
-    to: "/dashboard",
+    to: "/",
   },
   {
     id: "expenses",
