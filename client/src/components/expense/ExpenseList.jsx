@@ -2,8 +2,15 @@ import React from "react";
 import { MoreVertical } from "lucide-react";
 
 const ExpenseList = ({ expenses }) => {
+  const totalExpenses = expenses.length;
   return (
     <div className="mt-7 px-7">
+      <div>
+        <p className="font-bold text-[20px] font-ibmMono ">Expense History</p>
+        <p className="mb-2 font-inter text-gray-500">
+          {totalExpenses} expenses
+        </p>
+      </div>
       <div className="border border-gray-200 rounded-2xl overflow-hidden bg-white">
         {expenses.map((expense) => {
           const Icon = expense.icon;
@@ -38,15 +45,6 @@ const ExpenseList = ({ expenses }) => {
                         minute: "2-digit",
                       })}
                     </span>
-
-                    {expense.tags?.map((tag) => (
-                      <span
-                        key={tag}
-                        className="ml-2 rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-600"
-                      >
-                        {tag}
-                      </span>
-                    ))}
                   </div>
                 </div>
               </div>
