@@ -5,9 +5,10 @@ import { AnimatePresence } from "framer-motion";
 import ExpenseItem from "./ExpenseItem.jsx";
 import ExpenseDrawer from "./ExpenseDrawer.jsx";
 import { initialExpenses } from "../../data/expenses.js";
+import { useExpenses } from "../../context/ExpenseContext";
 
 export default function RecentExpenses() {
-  const [expenses, setExpenses] = useState(initialExpenses);
+  const { expenses, updateExpense, deleteExpense } = useExpenses();
   const [selectedExpense, setSelectedExpense] = useState(null);
 
   const [form, setForm] = useState({
