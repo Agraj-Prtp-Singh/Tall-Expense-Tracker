@@ -2,24 +2,7 @@ import React, { useState } from "react";
 import { MoreVertical, Pencil, Trash2 } from "lucide-react";
 
 const ExpenseList = ({ expenses, onEdit, onDelete }) => {
-  const totalExpenses = expenses.length;
-
-  // Stores the ID of the currently opened menu
   const [activeMenu, setActiveMenu] = useState(null);
-
-  const handleEdit = (expense) => {
-    // Close menu
-    setActiveMenu(null);
-
-    // Tell parent which expense should be edited
-    onEdit(expense);
-  };
-
-  const handleDelete = (expense) => {
-    setActiveMenu(null);
-
-    onDelete(expense);
-  };
 
   return (
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white">
@@ -28,7 +11,7 @@ const ExpenseList = ({ expenses, onEdit, onDelete }) => {
         <div>
           <h2 className="text-xl font-semibold">Expense History</h2>
 
-          <p className="text-sm text-gray-500">{totalExpenses} expenses</p>
+          <p className="text-sm text-gray-500">{expenses.length} expenses</p>
         </div>
       </div>
 
@@ -97,22 +80,26 @@ const ExpenseList = ({ expenses, onEdit, onDelete }) => {
                 <div className="absolute right-0 top-12 z-50 w-40 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg">
                   {/* Edit */}
                   <button
-                    onClick={() => handleEdit(expense)}
+                    onClick={() => {
+                      setActiveMenu(null);
+                      onEdit(expense);
+                    }}
                     className="flex w-full items-center gap-2 px-4 py-3 text-left hover:bg-gray-50"
                   >
                     <Pencil size={16} />
-
-                    <span>Edit</span>
+                    Edit
                   </button>
 
                   {/* Delete */}
                   <button
-                    onClick={() => handleDelete(expense)}
+                    onClick={() => {
+                      setActiveMenu(null);
+                      onDelete(expense.id);
+                    }}
                     className="flex w-full items-center gap-2 px-4 py-3 text-left text-red-600 hover:bg-red-50"
                   >
                     <Trash2 size={16} />
-
-                    <span>Delete</span>
+                    Delete
                   </button>
                 </div>
               )}
