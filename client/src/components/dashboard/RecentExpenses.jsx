@@ -8,7 +8,11 @@ import { initialExpenses } from "../../data/expenses.js";
 import { useExpenses } from "../../context/ExpenseContext";
 
 export default function RecentExpenses() {
-  const { expenses, updateExpense, deleteExpense } = useExpenses();
+  const {
+    expenses,
+    updateExpense,
+    deleteExpense: removeExpense,
+  } = useExpenses();
   const [selectedExpense, setSelectedExpense] = useState(null);
 
   const [form, setForm] = useState({
@@ -22,10 +26,18 @@ export default function RecentExpenses() {
     tags: [],
     receipt: null,
   });
-
   const openDrawer = (expense) => {
     setSelectedExpense(expense);
-    setForm({ ...expense });
+
+    setForm({
+      ...expense,
+      amount: expense.amount ?? "",
+      notes: expense.notes ?? "",
+      tags: expense.tags ?? [],
+      receipt: expense.receipt ?? null,
+      account: expense.account ?? "Personal Checking",
+      paymentMethod: expense.paymentMethod ?? "Card",
+    });
   };
 
   const closeDrawer = () => {
@@ -38,17 +50,13 @@ export default function RecentExpenses() {
       amount: Number(form.amount),
     };
 
-    setExpenses((prev) =>
-      prev.map((expense) =>
-        expense.id === updatedExpense.id ? updatedExpense : expense,
-      ),
-    );
+    updateExpense(updatedExpense);
 
     closeDrawer();
   };
 
   const deleteExpense = () => {
-    setExpenses((prev) => prev.filter((expense) => expense.id !== form.id));
+    removeExpense(form.id);
 
     closeDrawer();
   };
