@@ -1,22 +1,21 @@
 import React, { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+
 import SearchBar from "../components/expense/SearchBar";
 import ExpenseNav from "../components/expense/ExpenseNav";
 import ExpenseList from "../components/expense/ExpenseList";
-import { AnimatePresence } from "framer-motion";
+import ExpenseDrawer from "../components/expense/ExpenseDrawer";
 
-import { initialExpenses } from "../data/expenses";
+import { useExpenses } from "../context/ExpenseContext";
 
-const Expenses = () => {
-  const [expenses, setExpenses] = useState(initialExpenses);
+const Expense = () => {
+  const { expenses, updateExpense, deleteExpense } = useExpenses();
 
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
   const [sort, setSort] = useState("newest");
 
-  // Currently Selected Expenses
   const [selectedExpense, setSelectedExpense] = useState(null);
-
-  //Drawer form state
 
   const [form, setForm] = useState({
     title: "",
@@ -30,76 +29,55 @@ const Expenses = () => {
     receipt: null,
   });
 
+  // Open drawer
   const openDrawer = (expense) => {
     setSelectedExpense(expense);
-    setForm({ ...expense });
+
+    setForm({
+      ...expense,
+      amount: expense.amount ?? "",
+      notes: expense.notes ?? "",
+      tags: expense.tags ?? [],
+      receipt: expense.receipt ?? null,
+      account: expense.account ?? "Personal Checking",
+      paymentMethod: expense.paymentMethod ?? "Card",
+    });
   };
 
+  // Close drawer
   const closeDrawer = () => {
     setSelectedExpense(null);
   };
 
-  // Save Expenses
-
+  // Save edited expense
   const saveExpense = () => {
     const updatedExpense = {
       ...form,
       amount: Number(form.amount),
     };
 
-    setExpenses((prev) =>
-      prev.map((expense) =>
-        expense.id === updatedExpense.id ? updatedExpense : expense,
-      ),
-    );
+    updateExpense(updatedExpense);
 
     closeDrawer();
-    /*
-      LATER WITH BACKEND:
-
-      await fetch(`/api/expenses/${updatedExpense.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedExpense),
-      });
-
-      Then update local state after successful response.
-    */
   };
 
-  // Delete Expenses
-  const deleteExpense = () => {
-    setExpenses((prevExpenses) =>
-      prevExpenses.filter((expense) => expense.id !== form.id),
-    );
+  // Delete expense
+  const handleDelete = () => {
+    deleteExpense(form.id);
 
     closeDrawer();
-
-    /*
-      LATER WITH BACKEND:
-
-      await fetch(`/api/expenses/${form.id}`, {
-        method: "DELETE",
-      });
-    */
   };
 
-  // Filter + Search + Sort
-
-  const filteredExpenses = [...initialExpenses]
-    // Search
+  // Search + filter + sort
+  const filteredExpenses = [...expenses]
     .filter((expense) =>
       expense.title.toLowerCase().includes(search.toLowerCase()),
     )
 
-    // Category Filter
     .filter((expense) =>
       filter === "All" ? true : expense.category === filter,
     )
 
-    // Sort
     .sort((a, b) => {
       switch (sort) {
         case "newest":
@@ -141,14 +119,9 @@ const Expenses = () => {
       <ExpenseList
         expenses={filteredExpenses}
         onEdit={openDrawer}
-        onDelete={(expense) => {
-          setExpenses((prevExpenses) =>
-            prevExpenses.filter((item) => item.id !== expense.id),
-          );
-        }}
+        onDelete={deleteExpense}
       />
 
-      {/* Reusable Expense Drawer */}
       <AnimatePresence>
         {selectedExpense && (
           <ExpenseDrawer
@@ -156,7 +129,7 @@ const Expenses = () => {
             setForm={setForm}
             onClose={closeDrawer}
             onSave={saveExpense}
-            onDelete={deleteExpense}
+            onDelete={handleDelete}
           />
         )}
       </AnimatePresence>
@@ -164,4 +137,4 @@ const Expenses = () => {
   );
 };
 
-export default Expenses;
+export default Expense;
