@@ -4,7 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import SearchBar from "../components/expense/SearchBar";
 import ExpenseNav from "../components/expense/ExpenseNav";
 import ExpenseList from "../components/expense/ExpenseList";
-import ExpenseDrawer from "../components/expense/ExpenseDrawer";
+import ExpenseDrawer from "../components/dashboard/ExpenseDrawer";
 
 import { useExpenses } from "../context/ExpenseContext";
 
